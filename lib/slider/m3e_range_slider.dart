@@ -3,9 +3,6 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
-/// The M3ERangeSlider widget and its associated state.
-library;
-
 import 'dart:math' as math;
 import 'dart:ui' show lerpDouble;
 import 'package:flutter/material.dart';
@@ -62,7 +59,6 @@ class M3ERangeSlider extends StatefulWidget {
   /// An optional label shown in a pill above the active thumb while pressed.
   final String? label;
 
-  /// Creates a Material 3 Expressive Range Slider.
   const M3ERangeSlider({
     super.key,
     required this.value,
@@ -106,7 +102,7 @@ class _M3ERangeSliderState extends State<M3ERangeSlider>
   final ValueNotifier<bool> _isEndFocused = ValueNotifier(false);
 
   int _lastHapticTick = -1;
-  bool _isDraggingStart = false;
+  bool _isDraggingStart = true;
   bool _isDragging = false;
   double? _lastTapValue;
   VoidCallback? _snapStartListener;
@@ -195,13 +191,29 @@ class _M3ERangeSliderState extends State<M3ERangeSlider>
     super.dispose();
   }
 
+  bool _isStartFocusedFromPointer = false;
+  bool _isEndFocusedFromPointer = false;
+
   void _handleStartFocusChange() {
-    _isStartFocused.value = _startFocusNode.hasFocus;
+    if (!_startFocusNode.hasFocus) {
+      _isStartFocusedFromPointer = false;
+    }
+    _isStartFocused.value =
+        _startFocusNode.hasFocus && !_isStartFocusedFromPointer;
   }
 
   void _handleEndFocusChange() {
-    _isEndFocused.value = _endFocusNode.hasFocus;
+    if (!_endFocusNode.hasFocus) {
+      _isEndFocusedFromPointer = false;
+    }
+    _isEndFocused.value = _endFocusNode.hasFocus && !_isEndFocusedFromPointer;
   }
+
+  @visibleForTesting
+  bool get isStartFocusedForTesting => _isStartFocused.value;
+
+  @visibleForTesting
+  bool get isEndFocusedForTesting => _isEndFocused.value;
 
   void _updateStartInteraction() {
     if (_isStartPressed.value || _isStartHovered.value) {
@@ -301,19 +313,23 @@ class _M3ERangeSliderState extends State<M3ERangeSlider>
     if (distStart < distEnd) {
       _isDraggingStart = true;
       _isStartPressed.value = true;
+      _isStartFocusedFromPointer = true;
       _startFocusNode.requestFocus();
     } else if (distStart > distEnd) {
       _isDraggingStart = false;
       _isEndPressed.value = true;
+      _isEndFocusedFromPointer = true;
       _endFocusNode.requestFocus();
     } else {
       // If equal, favor the side based on location
       _isDraggingStart = rawValue < widget.value.start;
       if (_isDraggingStart) {
         _isStartPressed.value = true;
+        _isStartFocusedFromPointer = true;
         _startFocusNode.requestFocus();
       } else {
         _isEndPressed.value = true;
+        _isEndFocusedFromPointer = true;
         _endFocusNode.requestFocus();
       }
     }
@@ -387,12 +403,14 @@ class _M3ERangeSliderState extends State<M3ERangeSlider>
     if (distStart < distEnd) {
       _isDraggingStart = true;
       _isStartPressed.value = true;
+      _isStartFocusedFromPointer = true;
       _startFocusNode.requestFocus();
       widget.onChangeStart?.call(widget.value);
       _updateValue(start: rawValue.clamp(widget.min, widget.value.end));
     } else {
       _isDraggingStart = false;
       _isEndPressed.value = true;
+      _isEndFocusedFromPointer = true;
       _endFocusNode.requestFocus();
       widget.onChangeStart?.call(widget.value);
       _updateValue(end: rawValue.clamp(widget.value.start, widget.max));
@@ -472,6 +490,10 @@ class _M3ERangeSliderState extends State<M3ERangeSlider>
   }
 
   KeyEventResult _handleStartKeyEvent(FocusNode node, KeyEvent event) {
+    if (_isStartFocusedFromPointer) {
+      _isStartFocusedFromPointer = false;
+      _isStartFocused.value = _startFocusNode.hasFocus;
+    }
     if (!widget.enabled || widget.onChanged == null) {
       return KeyEventResult.ignored;
     }
@@ -526,6 +548,10 @@ class _M3ERangeSliderState extends State<M3ERangeSlider>
   }
 
   KeyEventResult _handleEndKeyEvent(FocusNode node, KeyEvent event) {
+    if (_isEndFocusedFromPointer) {
+      _isEndFocusedFromPointer = false;
+      _isEndFocused.value = _endFocusNode.hasFocus;
+    }
     if (!widget.enabled || widget.onChanged == null) {
       return KeyEventResult.ignored;
     }

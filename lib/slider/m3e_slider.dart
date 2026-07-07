@@ -3,9 +3,6 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
-/// The M3ESlider widget and its associated state.
-library;
-
 import 'dart:math' as math;
 import 'dart:ui' show lerpDouble;
 import 'package:flutter/material.dart';
@@ -68,7 +65,6 @@ class M3ESlider extends StatefulWidget {
   /// Override for the track icon size.
   final double? iconSize;
 
-  /// Creates a Material 3 Expressive Slider.
   const M3ESlider({
     super.key,
     required this.value,
@@ -173,9 +169,17 @@ class _M3ESliderState extends State<M3ESlider> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  bool _isFocusedFromPointer = false;
+
   void _handleFocusChange() {
-    _isFocused.value = _focusNode.hasFocus;
+    if (!_focusNode.hasFocus) {
+      _isFocusedFromPointer = false;
+    }
+    _isFocused.value = _focusNode.hasFocus && !_isFocusedFromPointer;
   }
+
+  @visibleForTesting
+  bool get isFocusedForTesting => _isFocused.value;
 
   void _updateInteractionAnimation() {
     if (_isPressed.value || _isHovered.value) {
@@ -226,6 +230,8 @@ class _M3ESliderState extends State<M3ESlider> with TickerProviderStateMixin {
 
   void _handleDragStart(DragStartDetails details) {
     if (!widget.enabled) return;
+    _isFocusedFromPointer = true;
+    _focusNode.requestFocus();
     _clearSnapListener();
     _snapController.stop();
     _isPressed.value = true;
@@ -267,6 +273,7 @@ class _M3ESliderState extends State<M3ESlider> with TickerProviderStateMixin {
 
   void _handleTapDown(TapDownDetails details, double totalLength) {
     if (!widget.enabled || totalLength <= 0) return;
+    _isFocusedFromPointer = true;
     _focusNode.requestFocus();
     _clearSnapListener();
     _snapController.stop();
@@ -349,6 +356,10 @@ class _M3ESliderState extends State<M3ESlider> with TickerProviderStateMixin {
   }
 
   KeyEventResult _handleKeyEvent(FocusNode node, KeyEvent event) {
+    if (_isFocusedFromPointer) {
+      _isFocusedFromPointer = false;
+      _isFocused.value = _focusNode.hasFocus;
+    }
     if (!widget.enabled || widget.onChanged == null) {
       return KeyEventResult.ignored;
     }
@@ -984,7 +995,7 @@ class _SliderTrackPainter extends CustomPainter {
         );
       } else {
         canvas.drawCircle(
-          Offset(size.width / 2, endPosition + trackCornerRadius),
+          Offset(size.width / 2, startPosition + trackCornerRadius),
           stopRadius,
           stopIndicatorPaint,
         );
