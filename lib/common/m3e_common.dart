@@ -172,7 +172,6 @@ class M3EMotion {
     damping: 1,
   );
 
-
   /// Creates a custom spring motion with the specified physics.
   ///
   /// [stiffness] controls how fast the spring bounces (higher = faster).
