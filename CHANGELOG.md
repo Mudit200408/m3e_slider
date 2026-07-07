@@ -1,0 +1,9 @@
+## 0.0.1
+
+* Initial release of `m3e_slider`.
+* `M3ESlider` — continuous, discrete, vertical, and icon-docking slider.
+* `M3ERangeSlider` — dual-thumb range slider with continuous/discrete modes.
+* `M3ESliderDecoration` — custom colors, haptics, track/thumb dimensions.
+* `M3ESliderColors` — full color token set for active, inactive, and disabled states.
+* `M3EHapticFeedback` — light, medium, and heavy haptic feedback levels.
+* `M3EMotion` — spring animation presets for slider interactions.
