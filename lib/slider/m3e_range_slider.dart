@@ -3,6 +3,9 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
+/// The M3ERangeSlider widget and its associated state.
+library;
+
 import 'dart:math' as math;
 import 'dart:ui' show lerpDouble;
 import 'package:flutter/material.dart';
@@ -59,6 +62,7 @@ class M3ERangeSlider extends StatefulWidget {
   /// An optional label shown in a pill above the active thumb while pressed.
   final String? label;
 
+  /// Creates a Material 3 Expressive Range Slider.
   const M3ERangeSlider({
     super.key,
     required this.value,

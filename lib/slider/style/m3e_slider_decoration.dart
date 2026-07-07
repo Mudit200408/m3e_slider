@@ -3,6 +3,9 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
+/// Styling and haptic overrides for Material 3 Expressive sliders.
+library;
+
 import 'package:flutter/widgets.dart';
 import '../../common/m3e_common.dart';
 import '../m3e_slider_theme.dart';
@@ -37,6 +40,7 @@ class M3ESliderDecoration {
   /// Custom height of the slider thumb.
   final double? thumbHeight;
 
+  /// Creates a styling and haptic override configuration for Material 3 Expressive sliders.
   const M3ESliderDecoration({
     this.colors,
     this.haptic = M3EHapticFeedback.none,

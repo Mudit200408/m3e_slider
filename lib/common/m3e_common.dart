@@ -1,3 +1,6 @@
+/// Common utilities, motion presets, and haptic feedback levels for M3E Slider.
+library;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:motor/motor.dart';
@@ -22,6 +25,7 @@ enum M3EHapticFeedback {
   /// Heavy impact feedback.
   heavy(3);
 
+  /// The integer value representing the haptic feedback level.
   final int value;
   const M3EHapticFeedback(this.value);
 

@@ -3,6 +3,9 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
+/// The M3ESlider widget and its associated state.
+library;
+
 import 'dart:math' as math;
 import 'dart:ui' show lerpDouble;
 import 'package:flutter/material.dart';
@@ -65,6 +68,7 @@ class M3ESlider extends StatefulWidget {
   /// Override for the track icon size.
   final double? iconSize;
 
+  /// Creates a Material 3 Expressive Slider.
   const M3ESlider({
     super.key,
     required this.value,

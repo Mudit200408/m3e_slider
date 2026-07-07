@@ -3,6 +3,9 @@
 // This source code is licensed under the MIT license found in the
 // LICENSE file in the root directory of this source tree.
 
+/// Themes and colors for the Material 3 Expressive slider components.
+library;
+
 import 'package:flutter/material.dart';
 
 /// Colors for the [M3ESlider] and [M3ERangeSlider] components.
@@ -38,6 +41,7 @@ class M3ESliderColors {
   /// Color of the inactive tick marks when disabled.
   final Color disabledInactiveTickColor;
 
+  /// Creates a set of colors for the [M3ESlider] and [M3ERangeSlider] components.
   const M3ESliderColors({
     required this.thumbColor,
     required this.disabledThumbColor,
@@ -115,6 +119,8 @@ class M3ESliderColors {
 
 /// Token defaults and helper methods for Material 3 Expressive Sliders.
 abstract class M3ESliderDefaults {
+  const M3ESliderDefaults._();
+
   /// Default alpha of the inactive part of the track.
   static const double inactiveTrackAlpha = 1.0;
 
