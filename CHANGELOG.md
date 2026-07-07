@@ -1,3 +1,7 @@
+## 0.0.2
+* Fix dot in vertical bar
+* Fix focused ring appearing in the normal interaction. 
+
 ## 0.0.1
 
 * Initial release of `m3e_slider`.
