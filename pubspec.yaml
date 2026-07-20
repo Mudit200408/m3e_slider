@@ -19,6 +19,7 @@ dependencies:
   flutter:
     sdk: flutter
   motor: ^1.1.0
+  m3e_haptics: ^0.0.1
 
 dev_dependencies:
   flutter_test:

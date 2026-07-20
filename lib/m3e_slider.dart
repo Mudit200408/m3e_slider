@@ -1,5 +1,6 @@
 /// M3E Slider — Material 3 Expressive slider components.
 library;
 
-export 'common/m3e_common.dart';
+export 'package:m3e_haptics/m3e_haptics.dart';
+export 'slider/common/m3e_common.dart';
 export 'slider/slider.dart';

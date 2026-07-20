@@ -4,7 +4,7 @@
 // LICENSE file in the root directory of this source tree.
 
 import 'package:flutter/widgets.dart';
-import '../../common/m3e_common.dart';
+import 'package:m3e_haptics/m3e_haptics.dart';
 import '../m3e_slider_theme.dart';
 
 /// Styling and haptic overrides for Material 3 Expressive sliders.
@@ -15,6 +15,9 @@ class M3ESliderDecoration {
 
   /// Haptic feedback level to apply during slider interactions.
   final M3EHapticFeedback? haptic;
+
+  /// Custom haptic configuration (continuous, bookends, velocity).
+  final M3EHapticConfig? hapticConfig;
 
   /// Override for the track icon size.
   final double? trackIconSize;
@@ -40,6 +43,7 @@ class M3ESliderDecoration {
   const M3ESliderDecoration({
     this.colors,
     this.haptic = M3EHapticFeedback.none,
+    this.hapticConfig,
     this.trackIconSize,
     this.trackIconActiveColor,
     this.trackIconInactiveColor,
@@ -53,6 +57,7 @@ class M3ESliderDecoration {
   M3ESliderDecoration copyWith({
     M3ESliderColors? colors,
     M3EHapticFeedback? haptic,
+    M3EHapticConfig? hapticConfig,
     double? trackIconSize,
     Color? trackIconActiveColor,
     Color? trackIconInactiveColor,
@@ -64,6 +69,7 @@ class M3ESliderDecoration {
     return M3ESliderDecoration(
       colors: colors ?? this.colors,
       haptic: haptic ?? this.haptic,
+      hapticConfig: hapticConfig ?? this.hapticConfig,
       trackIconSize: trackIconSize ?? this.trackIconSize,
       trackIconActiveColor: trackIconActiveColor ?? this.trackIconActiveColor,
       trackIconInactiveColor:
@@ -81,6 +87,7 @@ class M3ESliderDecoration {
       other is M3ESliderDecoration &&
           colors == other.colors &&
           haptic == other.haptic &&
+          hapticConfig == other.hapticConfig &&
           trackIconSize == other.trackIconSize &&
           trackIconActiveColor == other.trackIconActiveColor &&
           trackIconInactiveColor == other.trackIconInactiveColor &&
@@ -93,6 +100,7 @@ class M3ESliderDecoration {
   int get hashCode => Object.hash(
     colors,
     haptic,
+    hapticConfig,
     trackIconSize,
     trackIconActiveColor,
     trackIconInactiveColor,
