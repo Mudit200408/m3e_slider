@@ -1,3 +1,7 @@
+# 0.0.3
+* Migrate slider haptics to M3EHapticTracker 
+* Fix layout issues where the divider dots were not perfect
+
 ## 0.0.2
 * Fix dot in vertical bar
 * Fix focused ring appearing in the normal interaction. 

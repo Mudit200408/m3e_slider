@@ -33,7 +33,7 @@ You can try out the package demo here: [m3e_core demo](https://mudit200408.githu
 
 ```yaml
 dependencies:
-  m3e_slider: ^0.0.1
+  m3e_slider: ^0.0.3
 ```
 
 ```dart
