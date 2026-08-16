@@ -5,7 +5,7 @@
 
 import 'dart:math' as math;
 import 'dart:ui' show lerpDouble;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:m3e_haptics/m3e_haptics.dart';
 import 'package:m3e_slider/slider/common/m3e_common.dart';
