@@ -43,7 +43,7 @@ Add `m3e_slider` and `material_ui` to your `pubspec.yaml`:
 ```yaml
 dependencies:
   material_ui: ^1.0.0
-  m3e_slider: ^1.0.0
+  m3e_slider: ^1.0.1
 ```
 
 ```dart
@@ -284,6 +284,7 @@ Single-thumb slider with continuous and discrete modes.
 | `autofocus` | `bool` | `false` | Whether to autofocus |
 | `decoration` | `M3ESliderDecoration?` | — | Styling and haptic overrides |
 | `orientation` | `Axis` | `horizontal` | Layout axis |
+| `motion` | `M3EMotion` | `expressiveSpatialFast` | Motion spring preset for track-icon docking animations |
 | `label` | `String?` | — | Label shown in pill above thumb while pressed |
 | `icon` | `Widget?` | — | In-track icon widget |
 | `trailingIcon` | `bool` | `true` | Whether icon sits at trailing or leading end |
